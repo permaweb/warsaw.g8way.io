@@ -36,7 +36,7 @@
 
     await send({
       type: "register",
-      code: qr,
+      code: qr || target.handle.value,
       handle: target.handle.value,
       file: avatar,
       bio: target.bio.value
@@ -53,6 +53,8 @@
 {:else if current === "leaderboard" || current === "viewPlayer" || current === "loadPlayer"}
   <PlayerList
     players={context.players}
+    on:click={() => send("signup")}
+    on:stamp={(e) => send({ type: "stampPlayer", address: e.detail.address })}
     on:show={(e) => send({ type: "show", code: e.detail.code })}
   />
   {#if current === "viewPlayer"}

@@ -19,7 +19,7 @@
     location.search = "";
     dispatch("click");
   }
-  let completed = hoodie.stamps.length >= 3;
+  let completed = hoodie.stamps.length >= 14;
 </script>
 
 <input type="checkbox" id="hoodie" bind:checked={open} class="modal-toggle" />
@@ -83,12 +83,9 @@
                       </p>
                       <p class="my-8 font-poppins text-white-1/2">
                         {#if completed}
-                          <button
-                            class="btn btn-block btn-accent"
-                            on:click={() => alert("TODO: Create Player Profile")}>Register</button
-                          >
+                          Congrats! You completed the hunt! 🎉
                         {:else}
-                          Stamp 3 places to register as a player on the hunt!
+                          Stamp 114 places to complete the hunt!
                         {/if}
                       </p>
                     </div>
@@ -97,7 +94,7 @@
                         class={`psd-d-status-bar-current ${
                           completed ? `psd-d-status-bar-completed` : ""
                         }`}
-                        style={`width: ${((hoodie.stamps.length / 3) * 100).toString()}%`}
+                        style={`width: ${((hoodie.stamps.length / 14) * 100).toString()}%`}
                       >
                         {#if completed}
                           <img src={completedIcon} alt="Completed Icon" />

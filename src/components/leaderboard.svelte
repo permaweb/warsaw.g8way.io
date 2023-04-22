@@ -4,6 +4,10 @@
   import LeaderboardSearchBar from "./leaderboard/search.svelte";
   import PixelsAnimatingOne from "./svgs/pixels-animating-1.svelte";
   import PixelsAnimatingTwo from "./svgs/pixels-animating-2.svelte";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+  const address = localStorage.getItem("address");
 
   export let players;
 </script>
@@ -15,6 +19,15 @@
     </div>
     <div class="pixels-two moving-delay">
       <PixelsAnimatingTwo />
+    </div>
+    <div class="h-24 flex absolute w-full">
+      <!-- {#if address}
+        <button class="btn btn-block bg-[#ff8500]" on:click={() => dispatch("stamp", { address })}
+          >Stamp Me</button
+        > 
+      {:else}
+        <button class="btn btn-block bg-[#ff8500]" on:click>Sign Up</button>
+      {/if} -->
     </div>
     <LeaderboardTopPlayers {players} on:show />
     <!-- <LeaderboardSearchBar /> -->

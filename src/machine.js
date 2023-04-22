@@ -51,7 +51,9 @@ export default function (
         "loadPlayer",
         reduce((ctx, ev) => ({ ...ctx, player: ctx.players.find(propEq("code", ev.code)) }))
       ),
-      transition("register", "register")
+      transition("signup", "form"),
+      transition("register", "register"),
+      transition("stampPlayer", "stampPlayer")
     ),
     loadPlayer: invoke(
       async (ctx) => {
@@ -162,6 +164,7 @@ export default function (
           avatar: avatar.id
         });
 
+        localStorage.setItem("address", address);
         location.search = "";
         // reset to leaderboard
         return result;
