@@ -2,6 +2,8 @@ import { validate } from "./model.js";
 import { Async, AsyncReader } from "./utils.js";
 import { always } from "ramda";
 
+const GAME_CONTRACT = import.meta.env.VITE_GAME_CONTRACT;
+
 const { ask, of, lift } = AsyncReader;
 
 /**
@@ -40,15 +42,15 @@ export function register(player) {
                 { name: "Type", value: "profile" },
                 { name: "Description", value: player.bio },
                 { name: "Title", value: player.handle },
-                { name: "Render-With", value: "swag" },
-                { name: "SWAG-Code", value: player.code }
+                { name: "Render-With", value: "hunt" },
+                { name: "HUNT-Code", value: player.code }
                 //{ name: "Profile", value: player.profileTxId }
               ]
             })
               // register Player on game contract
               .chain(({ contractTxId }) =>
                 writeAction({
-                  contract: "PN1UdRoELsWRulkWwmO6n_27d5lFPo4q8VCWvQw7U14",
+                  contract: GAME_CONTRACT,
                   input: {
                     function: "register",
                     code: player.code,

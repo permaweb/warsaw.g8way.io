@@ -19,11 +19,29 @@
           You've Scanned
         </div>
         <div class="w-full bg-[#f2f3f4] text-neutral py-2 my-2 text-[18px]">
-          <p>{`Stamp Hoodie #${id}`}</p>
+          <p>{`Place/Player #${id}`}</p>
         </div>
       </div>
       <div class="mt-8 mb-16 flex items-center justify-center w-full h-full">
-        <img src={hoodieIcon} alt={"Avatar"} />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-32 h-32"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+          />
+        </svg>
       </div>
       <div class="modal-actions">
         <button

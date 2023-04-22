@@ -16,8 +16,8 @@
 
 <div class="top-players">
   <div class="top-players-header">
-    <h1 class="font-roboto-mono-700 font-bold uppercase">LEADERBOARD</h1>
-    <p>Stamps Collected</p>
+    <h1 class="font-roboto-mono-700 font-bold uppercase">HUNT</h1>
+    <p>Places Stamped</p>
   </div>
   <div class="top-players-avatars">
     <div class="top-players-avatar">

@@ -38,7 +38,7 @@
           </div>
           <div class="pc-sl-container-p">
             <div class="center-message">
-              <p>{`Stamp Hoodie #${player.code}`}</p>
+              <p>{`Place/Player #${player.code}`}</p>
             </div>
             <div class="center-message">
               <p style="margin: 20px 0 0 0; color: #5AFF7F">Stamped!</p>

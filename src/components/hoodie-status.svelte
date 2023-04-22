@@ -52,7 +52,25 @@
           </div>
           <div class="flex relative justify-center items-center w-full">
             <div class="absolute top-[-50px] flex justify-center my-16">
-              <img class="h-24 w-24" src={hoodieIcon} alt="Hoodie Icon" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-24 h-24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                />
+              </svg>
             </div>
 
             <div class="mt-24 flex bg-gray-700 w-2/3 px-4 py-8 rounded-4">
@@ -61,12 +79,17 @@
                   <div class="">
                     <div>
                       <p class="uppercase font-bold font-roboto-mono text-white text=[19px]">
-                        {completed ? `Hoodie Unlocked !` : `Unlock Hoodie !`}
+                        {completed ? `Player Unlocked !` : `Unlock Player !`}
                       </p>
                       <p class="my-8 font-poppins text-white-1/2">
-                        {completed
-                          ? `Find us @ FwdResearch booth to claim your hoodie.`
-                          : `Give 3 stamps and get your own stamp game hoodie.`}
+                        {#if completed}
+                          <button
+                            class="btn btn-block btn-accent"
+                            on:click={() => alert("TODO: Create Player Profile")}>Register</button
+                          >
+                        {:else}
+                          Stamp 3 places to register as a player on the hunt!
+                        {/if}
                       </p>
                     </div>
                     <div class="psd-d-status-bar">

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Route } from "tinro";
   import Leaderboard from "./leaderboard.svelte";
-
   // setup hash router mode
   // router.mode.hash();
 </script>

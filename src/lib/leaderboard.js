@@ -2,12 +2,12 @@ import { assoc, compose, prop, propEq, values, sortWith, descend } from "ramda";
 import { AsyncReader, Async } from "./utils.js";
 
 const { of, ask, lift } = AsyncReader;
-
+const GAME_CONTRACT = import.meta.env.VITE_GAME_CONTRACT;
 /**
  * @returns {AsyncReader}
  */
 export function leaderboard() {
-  return of("PN1UdRoELsWRulkWwmO6n_27d5lFPo4q8VCWvQw7U14")
+  return of(GAME_CONTRACT)
     .chain((contract) =>
       ask(({ getState }) =>
         getState(contract)

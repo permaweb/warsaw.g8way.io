@@ -1,5 +1,7 @@
 import { AsyncReader } from "./utils.js";
 
+const GAME_CONTRACT = import.meta.env.VITE_GAME_CONTRACT;
+
 const { ask, lift } = AsyncReader;
 
 /**
@@ -9,7 +11,7 @@ const { ask, lift } = AsyncReader;
 export function reset(code) {
   return ask(({ writeAction }) =>
     writeAction({
-      contract: "PN1UdRoELsWRulkWwmO6n_27d5lFPo4q8VCWvQw7U14",
+      contract: GAME_CONTRACT,
       input: {
         function: "slash",
         code
