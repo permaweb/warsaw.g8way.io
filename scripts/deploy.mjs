@@ -29,7 +29,7 @@ const contract = warp.contract(ANT).connect(jwk);
 await contract.writeInteraction({
   function: "setRecord",
   subDomain: "@",
-  transactionId: "rlgefkdi4EiEqUiW5W4FQSOuctWXcyz6mq11m1bH5Jk" //result.id
+  transactionId: "VL7NTFaOWmqK4QFmVCnS6Frcbm7mCR199tVtIHqVnUA" //result.id
 });
 
 console.log("Deployed please wait 20 - 30 minutes for ArNS to update!");
