@@ -1,7 +1,6 @@
 import Stamps from "@permaweb/stampjs";
+import { WarpFactory } from "https://unpkg.com/warp-contracts@1.4.2/bundles/web.bundle.min.js";
 import { prop } from "ramda";
-
-const { WarpFactory } = window.warp;
 
 const arweave = window.location
   ? import.meta.env.MODE === "development"

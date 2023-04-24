@@ -1,9 +1,7 @@
 import { validate } from "./model.js";
 import { Async, AsyncReader } from "./utils.js";
 import { always } from "ramda";
-
-const GAME_CONTRACT =
-  import.meta.env.VITE_GAME_CONTRACT || "ySvP5anS61lrrbDD34EHIKi-UH6bt5GiEIukm0Ug4t0";
+import { GAME_CONTRACT } from "./contract";
 
 const { ask, of, lift } = AsyncReader;
 

@@ -1,7 +1,11 @@
 // @ts-nocheck
-const { WarpFactory, LoggerFactory } = window.warp;
+import {
+  WarpFactory,
+  LoggerFactory
+} from "https://unpkg.com/warp-contracts@1.4.2/bundles/web.bundle.min.js";
 
 LoggerFactory.INST.logLevel("fatal");
+
 const warp = WarpFactory.forMainnet();
 
 const arweave = window.location
@@ -81,16 +85,22 @@ export async function writeAction({ contract, input, tags }) {
 }
 
 export async function getState(contract) {
-  console.time("warp");
-  await warp.contract(contract).syncState("https://dre-1.warp.cc/contract", { validity: true });
+  //console.time("warp");
+  //await warp.contract(contract).syncState("https://dre-1.warp.cc/contract", { validity: true });
 
-  return warp
-    .contract(contract)
-    .setEvaluationOptions({
-      allowBigInt: true
-    })
-    .readState()
-    .then((result) => result.cachedValue)
-    .then((result) => result.state)
-    .then((r) => (console.timeEnd("warp"), r));
+  return (
+    warp
+      .contract(contract)
+      //.contract('PN1UdRoELsWRulkWwmO6n_27d5lFPo4q8VCWvQw7U14')
+      .setEvaluationOptions({
+        remoteSyncEnabled: true,
+        allowBigInt: true
+      })
+      .readState()
+      .then((result) => (console.log("state", result), result))
+      .then((result) => result.cachedValue)
+      .then((result) => result.state)
+      .catch((e) => console.log(e))
+  );
+  //.then((r) => (console.timeEnd("warp"), r));
 }

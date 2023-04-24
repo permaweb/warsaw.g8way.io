@@ -1,7 +1,5 @@
 import { AsyncReader } from "./utils.js";
-
-const GAME_CONTRACT =
-  import.meta.env.VITE_GAME_CONTRACT || "ySvP5anS61lrrbDD34EHIKi-UH6bt5GiEIukm0Ug4t0";
+import { GAME_CONTRACT } from "./contract";
 
 const { ask, lift } = AsyncReader;
 
