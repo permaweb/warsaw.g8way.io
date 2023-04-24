@@ -2,7 +2,8 @@ import { assoc, compose, prop, propEq, values, sortWith, descend } from "ramda";
 import { AsyncReader, Async } from "./utils.js";
 
 const { of, ask, lift } = AsyncReader;
-const GAME_CONTRACT = import.meta.env.VITE_GAME_CONTRACT;
+const GAME_CONTRACT =
+  import.meta.env.VITE_GAME_CONTRACT || "ySvP5anS61lrrbDD34EHIKi-UH6bt5GiEIukm0Ug4t0";
 /**
  * @returns {AsyncReader}
  */
