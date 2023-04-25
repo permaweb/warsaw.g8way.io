@@ -45,7 +45,7 @@
                     >{completed ? "🎉" : "+"} {hoodie.stamps.length}</span
                   >
                   &nbsp;
-                  <span class="psc-span-inactive">/ 3</span>
+                  <span class="psc-span-inactive">/ 14</span>
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@
                         {#if completed}
                           Congrats! You completed the hunt! 🎉
                         {:else}
-                          Stamp 114 places to complete the hunt!
+                          Stamp 14 places to complete the hunt!
                         {/if}
                       </p>
                     </div>

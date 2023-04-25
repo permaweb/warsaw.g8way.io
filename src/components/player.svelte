@@ -31,42 +31,46 @@
           <div class="pc-u-container" style="margin: 0 0 20px 0;">
             <p>{`@${player.handle}`}</p>
           </div>
-          <div class="pc-a-container">
-            <img src={`https://arweave.net/${player.avatar}`} alt={"Avatar"} />
-          </div>
-          <div class="pc-b-container">
-            <p>{player.bio}</p>
-          </div>
+          {#if player.handle !== "start"}
+            <div class="pc-a-container">
+              <img src={`https://arweave.net/${player.avatar}`} alt={"Avatar"} />
+            </div>
+
+            <div class="pc-b-container">
+              <p>{player.bio}</p>
+            </div>
+          {/if}
+          {#if player.handle === "start"}
+            <div class="flex flex-col items-start text-white space-y-2 mx-4 mt-4">
+              <div>Welcome to the Scavenger Hunt Game!</div>
+              <div class="text-left">
+                In this game your objective is to STAMP as many QR Code marked locations as possible
+                at Permapalooza.
+              </div>
+              <div class="text-left">
+                In order to, STAMP places you will need an Arweave Wallet, these steps will setup
+                your wallet and STAMP your first place. "Start"
+              </div>
+              <ul class="text-left numbers">
+                <li>1. Click "Stamp"</li>
+                <li>2. On "Arweave.App" click "Add Wallet"</li>
+                <li>3. Click "Create new Wallet"</li>
+                <li>
+                  4. When "generation complete" click "Passphased Saved? Click here to proceed"
+                </li>
+                <li>5. Click Connect</li>
+                <li>6. Click Accept</li>
+                <li>7. Tab back to the "Svanger Hunt App"</li>
+              </ul>
+              <blockquote class="text-left">
+                * NOTE: make sure you have private tabs disabled or the wallet will not stay stored
+                in your browser.
+              </blockquote>
+            </div>
+          {/if}
           <div class="pc-sl-container-p">
             {#if player.stamps.length > 0}
               <StampedAvatars stamps={player.stamps} amount={7} />
-              <!--
-              <div class="info-flex">
-                <p class="font-poppins">Stamped by</p>
-                <span class="font-poppins"
-                  >{`(${player.stamps.length}) Player${player.stamps.length > 1 ? "s" : ""}`}</span
-                >
-              </div>
-              <div class="pc-sl-container-p-flex">
-                <div class="pc-sl-container-pl">
-                  {#each slicedStampList as element}
-                    {#if element.player}
-                      <img
-                        src="https://arweave.net/{element.player.avatar}"
-                        alt={element.player.handle}
-                      />
-                    {:else}
-                      <img src={profile} alt={"Avatar"} />
-                    {/if}
-                  {/each}
-                </div>
-                <div class="pc-sl-container-e">
-                  {#if player.stamps.length > 7}
-                    <span>+{player.stamps.length - 7}</span>
-                  {/if}
-                </div>
-              </div>
-              -->
             {:else}
               <div class="pc-empty-wrapper">
                 <p>Be the first to stamp this player</p>

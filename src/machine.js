@@ -109,13 +109,14 @@ export default function (
       transition("done", "confirmation"),
       transition(
         "error",
-        "error",
-        reduce((ctx) => {
+        "errorStamp",
+        reduce((ctx, ev) => {
+          //console.log(ev)
           return {
             ...ctx,
             error: {
-              title: "Already Stamped!",
-              message: "Looks like you have already stamped this player."
+              title: "Could not STAMP!",
+              message: "Looks like you did not create/connect your wallet."
             }
           };
         })
