@@ -1,5 +1,6 @@
+import { GAME_CONTRACT } from "./contract";
 import { AsyncReader, Async } from "./utils.js";
-import { filter, prop, propEq, values, sortWith, descend } from "ramda";
+import { filter, prop, propEq, values, sortWith, descend, map, find, path } from "ramda";
 const { of, ask, lift } = AsyncReader;
 
 /**
@@ -13,9 +14,27 @@ export function playerStamps(token) {
         fetchStamps()
           .map(filter(propEq("asset", token)))
           .map(sortWith([descend(prop("timestamp"))]))
+          // attach to players
+          .chain((stamps) =>
+            fetchPlayers().map((players) =>
+              map(
+                (stamp) => ({ ...stamp, player: find(propEq("address", stamp.address), players) }),
+                stamps
+              )
+            )
+          )
+          .map((x) => (console.log("stampe-players", x), x))
       )
     )
+
     .chain(lift);
+}
+
+function fetchPlayers() {
+  return Async.fromPromise(fetch)("https://cache-1.permaweb.tools/contract?id=" + GAME_CONTRACT)
+    .chain((res) => Async.fromPromise(res.json.bind(res))())
+    .map(path(["state", "players"]))
+    .map(values);
 }
 
 function fetchStamps() {

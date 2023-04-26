@@ -15,6 +15,20 @@
   const dispatch = createEventDispatcher();
 
   $: open = current === "viewPlayer";
+
+  function getProfile(stamp) {
+    if (stamp?.player?.avatar) {
+      return "https://arweave.net/" + stamp?.player?.avatar;
+    }
+    return profile;
+  }
+
+  function getHandle(stamp) {
+    if (stamp?.player?.handle) {
+      return stamp?.player?.handle;
+    }
+    return `${take(5, stamp.address)}...${takeLast(5, stamp.address)}`;
+  }
 </script>
 
 <input type="checkbox" id="player" bind:checked={open} class="modal-toggle" />
@@ -45,9 +59,9 @@
               {#each player.stamps as stamp}
                 <div class="p-row">
                   <div class="p-info">
-                    <img src={profile} alt={"Profile Icon"} />
+                    <img class="mask mask-circle" src={getProfile(stamp)} alt={"Profile Icon"} />
                     <p class="font-roboto-mono font-bold">
-                      {take(5, stamp.address)}...{takeLast(5, stamp.address)}
+                      {getHandle(stamp)}
                     </p>
                   </div>
                   <div class="p-ts">

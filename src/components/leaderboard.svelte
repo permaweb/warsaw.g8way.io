@@ -25,9 +25,10 @@
         <button class="btn btn-block bg-[#ff8500]" on:click={() => dispatch("stamp", { address })}
           >Stamp Me</button
         > 
-      {:else}
+        -->
+      {#if !address}
         <button class="btn btn-block bg-[#ff8500]" on:click>Sign Up</button>
-      {/if} -->
+      {/if}
     </div>
     <LeaderboardTopPlayers {players} on:show />
     <!-- <LeaderboardSearchBar /> -->
