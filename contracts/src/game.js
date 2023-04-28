@@ -1,4 +1,4 @@
-/* global ContractError ContractAssert SmartWeave */
+/* global ContractAssert ContractError SmartWeave */
 
 const propEq = (k, v) => (o) => o[k] === v;
 const functions = { register, slash, reset, evolve, setAdmin };
@@ -43,34 +43,36 @@ async function register(state, action) {
   ContractAssert(action.caller && action.caller.length === 43, "caller is invalid");
   ContractAssert(action.input.avatar, "avatar id is required!");
   ContractAssert(action.input.bio, "bio is required!");
-  ContractAssert(action.input.handle, "handle is required!");
+  ContractAssert(action.input.handle, "user is required!");
+
+  const _state = typeof state === "string" ? JSON.parse(state) : Object.assign({}, state);
 
   const code = action.input.code;
   const address = action.caller;
   const token = action.input.token;
   const avatar = action.input.avatar;
   const bio = action.input.bio;
-  const handle = action.input.handle;
 
-  if (state.players[code]) {
+  if (_state.players[code]) {
     throw new ContractError("Player already registered!");
   }
 
   // readContractState of token is owned by the address
   const contract = await SmartWeave.contracts.readContractState(action.input.token);
+
   if (contract.balances[address] > 0) {
-    state.players[code] = {
+    _state.players[code] = {
       address,
       token,
       admin: false,
       code,
       avatar,
-      handle,
+      handle: action.input.handle,
       bio
     };
   }
 
-  return { state };
+  return { state: _state };
 }
 
 /**
@@ -81,18 +83,20 @@ function slash(state, action) {
   ContractAssert(action.input.code, "QR Code is Required!");
   ContractAssert(action.caller && action.caller.length === 43, "caller is invalid!");
 
+  const _state = typeof state === "string" ? JSON.parse(state) : Object.assign({}, state);
+
   // if caller is admin then allow slash
-  const caller = Object.values(state.players).find(propEq("address", action.caller));
+  const caller = Object.values(_state.players).find(propEq("address", action.caller));
   if (caller && caller.admin) {
-    delete state.players[action.input.code];
+    delete _state.players[action.input.code];
   }
 
   // if caller is creator then allow slash
-  if (action.caller === state.creator) {
-    delete state.players[action.input.code];
+  if (action.caller === _state.creator) {
+    delete _state.players[action.input.code];
   }
 
-  return { state };
+  return { state: _state };
 }
 
 /**
@@ -103,12 +107,13 @@ function reset(state, action) {
   ContractAssert(action.input.name, "Name is Required!");
   ContractAssert(action.caller && action.caller.length === 43, "caller is invalid!");
 
-  if (state.creator === action.caller) {
-    state.players = {};
-    state.name = action.input.name;
-    state.description = action.input.description || "swag game";
+  const _state = typeof state === "string" ? JSON.parse(state) : Object.assign({}, state);
+  if (_state.creator === action.caller) {
+    _state.players = {};
+    _state.name = action.input.name;
+    _state.description = action.input.description || "swag game";
   }
-  return { state };
+  return { state: _state };
 }
 
 /**
@@ -117,12 +122,13 @@ function reset(state, action) {
  */
 function evolve(state, action) {
   ContractAssert(action.input.value, "Contract-Src value is Required!");
-  if (state.canEvolve) {
-    if (state.creator === action.caller) {
-      state.evolve = action.input.value;
+  const _state = typeof state === "string" ? JSON.parse(state) : Object.assign({}, state);
+  if (_state.canEvolve) {
+    if (_state.creator === action.caller) {
+      _state.evolve = action.input.value;
     }
   }
-  return { state };
+  return { state: _state };
 }
 
 /**
@@ -134,14 +140,16 @@ function setAdmin(state, action) {
   ContractAssert(action.input.address, "Player Address is Required!");
   ContractAssert(action.caller && action.caller.length === 43, "caller is invalid!");
 
-  const isAdmin = Object.values(state.players).find(propEq("address", action.caller)).admin;
-  const player = Object.values(state.players).find(
+  const _state = typeof state === "string" ? JSON.parse(state) : Object.assign({}, state);
+
+  const isAdmin = Object.values(_state.players).find(propEq("address", action.caller)).admin;
+  const player = Object.values(_state.players).find(
     (p) => p.address === action.input.address && p.token === action.input.token
   );
 
   if (isAdmin && player) {
-    state.players[player.code] = { ...player, admin: true };
+    _state.players[player.code] = { ...player, admin: true };
   }
 
-  return { state };
+  return { state: _state };
 }

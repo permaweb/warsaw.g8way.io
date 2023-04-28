@@ -1,9 +1,15 @@
 {
   "name": "contracts",
   "version": "1.0.0",
-  "main": "src/game.js",
   "license": "MIT",
+  "type": "module",
+  "main": "src/game.js",
   "scripts": {
+    "build": "node build.js",
     "deploy": "npx warp-contracts-cli deploy"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.18",
+    "replace-in-file": "^6.3.5"
   }
 }

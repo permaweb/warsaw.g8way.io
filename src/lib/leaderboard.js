@@ -1,4 +1,4 @@
-import { assoc, compose, prop, propEq, values, sortWith, descend } from "ramda";
+import { assoc, compose, prop, propEq, values, sortWith, descend, filter } from "ramda";
 import { AsyncReader, Async } from "./utils.js";
 import { GAME_CONTRACT } from "./contract";
 
@@ -8,16 +8,17 @@ const { of, ask, lift } = AsyncReader;
  * @returns {AsyncReader}
  */
 export function leaderboard() {
-  console.log("GET GAME CONTRACT", GAME_CONTRACT);
   return of(GAME_CONTRACT)
     .chain((contract) =>
-      ask(({ getState }) =>
-        getState(contract)
-          .map((x) => (console.log(x), x))
-          .map(compose(values, prop("players")))
-          .map((x) => (console.log(x), x))
-          .chain(fetchStamps)
-          .map(sortWith([descend(prop("collected"))]))
+      ask(
+        ({ getState }) =>
+          getState(contract)
+            .map((x) => (console.log(x), x))
+            .map(compose(values, prop("players")))
+            .map((x) => (console.log(x), x))
+            .chain(fetchStamps)
+            .map(sortWith([descend(prop("collected"))]))
+        //.map(filter((p) => p.collected > 0))
       )
     )
     .chain(lift);
