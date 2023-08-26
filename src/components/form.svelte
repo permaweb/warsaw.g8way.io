@@ -68,7 +68,6 @@
             rows="3"
             placeholder="enter bio...(required)"
             class="font-work-sans-400 textarea w-[250px] bg-white text-black min-w-[280px]"
-            required
           />
         </div>
       </div>

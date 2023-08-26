@@ -1,10 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "ScavengerHunt",
-  "short_name": "ScavengerHunt",
+  "name": "EthWarsawStamps",
+  "short_name": "EthWarsaw",
   "start_url": ".",
   "display": "standalone",
-  "description": "QR Code Game",
+  "description": "STAMP QR Code Game",
   "icons": [
     {
       "src": "arweave.svg",

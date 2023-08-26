@@ -12,8 +12,8 @@ import { count, filter, stamp } from "./services/stamp-utils.js";
 
 const wallet = new ArweaveWebWallet({
   // Initialize the wallet as soon as possible to get instant auto reconnect
-  name: "Scavenger Hunt",
-  logo: "https://hunt.ar-io.dev/arweave.svg"
+  name: "EthWarsaw Stamper",
+  logo: "https://warsaw.arweave.dev/arweave.svg"
 });
 
 wallet.setUrl("arweave.app");

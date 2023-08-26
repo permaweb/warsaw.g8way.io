@@ -16,7 +16,7 @@
 
 <div class="top-players">
   <div class="top-players-header">
-    <h1 class="font-roboto-mono-700 font-bold uppercase">HUNT</h1>
+    <h1 class="font-roboto-mono-700 font-bold uppercase">EthWarsaw</h1>
     <p>Places Stamped</p>
   </div>
   <div class="top-players-avatars">

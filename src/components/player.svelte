@@ -42,10 +42,10 @@
           {/if}
           {#if player.handle === "start"}
             <div class="flex flex-col items-start text-white space-y-2 mx-4 mt-4">
-              <div>Welcome to the Scavenger Hunt Game!</div>
+              <div>Welcome to the Eth Warsaw Stamp Game!</div>
               <div class="text-left">
                 In this game your objective is to STAMP as many QR Code marked locations as possible
-                at Permapalooza.
+                at EthWarsaw.
               </div>
               <div class="text-left">
                 In order to, STAMP places you will need an Arweave Wallet, these steps will setup

@@ -7,7 +7,7 @@
 
 <section class="flex flex-col items-center justify-center">
   <img src={"https://arweave.net/IkMJRqi_0Xx_QhstK4WE3rsQqQxC07n84UagPgqGXfc"} alt="heading" />
-  <p class="font-mono text-2xl text-black">Scavenger Hunt</p>
+  <p class="font-mono text-2xl text-black">EthWarsaw Stamper</p>
   {#if msg}
     <div class="mt-8 text-xl bg-secondary text-white w-full">{msg}</div>
   {/if}
