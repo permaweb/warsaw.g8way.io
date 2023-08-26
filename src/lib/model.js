@@ -15,7 +15,8 @@ const PlayerSchema = z.object({
   code: z.string(),
   admin: z.boolean().optional(),
   collected: z.array(StampSchema).optional(),
-  given: z.array(StampSchema).optional()
+  given: z.array(StampSchema).optional(),
+  points: z.number().optional()
 });
 
 export function validate(data) {

@@ -63,7 +63,7 @@ export async function deployContract({ srcTxId, initState, tags }) {
  */
 export async function writeAction({ contract, input, tags }) {
   try {
-    const _tx = await arweave.createTransaction({ data: "swag" });
+    const _tx = await arweave.createTransaction({ data: "stamp-game" });
     _tx.addTag("App-Name", "SmartWeaveAction");
     _tx.addTag("App-Version", "0.3.0");
     _tx.addTag("Contract", contract);

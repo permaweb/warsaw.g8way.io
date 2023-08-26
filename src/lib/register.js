@@ -17,6 +17,7 @@ const { ask, of, lift } = AsyncReader;
  * @property {string} handle
  * @property {string} avatar
  * @property {string} code
+ * @property {number} points
  */
 /**
  * @param {Player} player - player profile data
@@ -31,18 +32,20 @@ export function register(player) {
           .chain((player) =>
             // create Player Contract
             deployContract({
-              srcTxId: "j9Lk3cTmukZS2-hae9GYxK1CuHtWtHcA1V5-tkIfu5k",
+              srcTxId: "Of9pi--Gj7hCTawhgxOwbuWnFI1h24TTgO5pw8ENJNQ",
               initState: {
                 balances: { [player.address]: 1 },
-                pairs: [],
-                swag: player.swag
+                claimable: [],
+                swag: player.swag,
+                name: player.handle,
+                ticker: "STAMP-GAME"
               },
               tags: [
                 { name: "Type", value: "profile" },
                 { name: "Description", value: player.bio },
                 { name: "Title", value: player.handle },
-                { name: "Render-With", value: "hunt" },
-                { name: "HUNT-Code", value: player.code }
+                { name: "Render-With", value: "warsaw" },
+                { name: "WARSAW-Code", value: player.code }
                 //{ name: "Profile", value: player.profileTxId }
               ]
             })
@@ -57,7 +60,8 @@ export function register(player) {
                     handle: player.handle,
                     address: player.address,
                     bio: player.bio,
-                    avatar: player.avatar
+                    avatar: player.avatar,
+                    points: player.points
                   }
                 })
               )

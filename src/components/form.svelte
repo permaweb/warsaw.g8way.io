@@ -6,11 +6,15 @@
 
   import profileIcon from "../assets/profile.svg";
 
+  let showPoints = false;
+
   const dispatch = createEventDispatcher();
   let files = [];
   onMount(async (e) => {
+    // show points input if query string
+    showPoints = window.location.search.length > 0;
     const wallet = new ArweaveWebWallet({
-      name: "SWAG STAMPER"
+      name: "EthWarsaw STAMP Game"
     });
     wallet.setUrl("arweave.app");
     await wallet.connect().catch((e) => console.log(e));
@@ -28,7 +32,7 @@
         <PixelsAnimatingTwo />
       </div>
       <h3 class="mt-32 text-[25px] font-roboto-mono font-bold text-white uppercase">
-        Join the game
+        {showPoints ? "Register QR Code" : "Join the game"}
       </h3>
       <div class="flex flex-col items-center">
         <div>
@@ -62,6 +66,17 @@
             required
           />
         </div>
+        {#if showPoints}
+          <div class="mb-4 form-control">
+            <input
+              type="number"
+              name="points"
+              placeholder="enter points...(required)"
+              class="font-work-sans-400 input rounded-md bg-white text-black min-w-[280px] h-[60px]"
+              required
+            />
+          </div>
+        {/if}
         <div class="form-control">
           <textarea
             name="bio"
