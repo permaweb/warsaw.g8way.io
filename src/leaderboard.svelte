@@ -32,9 +32,14 @@
   // }
   async function createPlayer({ target }) {
     // compress & resize file
-
     //const avatar = await compressAndResizeImage(target.avatar.files[0]);
-    const avatar = target.avatar.files[0];
+    const avatarFile = target.avatar.files[0];
+    const avatar =
+      avatarFile.type === "image/svg+xml"
+        ? avatarFile
+        : avatarFile.size < 100_000
+        ? avatarFile
+        : await compressAndResizeImage(target.avatar.files[0]);
     await send({
       type: "register",
       code: qr || target.handle.value,

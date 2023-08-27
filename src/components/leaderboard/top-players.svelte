@@ -33,7 +33,7 @@
           <div class="top-players-label-pubkey">
             {truncatePubkey(players[1].address)}
           </div>
-          <LeaderboardStampCounter count={players[1].collected} on:click={show(players[1].code)} />
+          <LeaderboardStampCounter count={players[1].score || 0} on:click={show(players[1].code)} />
         </div>
       {:else}
         <img src={profileIcon} alt="avatar" />
@@ -75,7 +75,7 @@
           <div class="top-players-label-pubkey">
             {truncatePubkey(players[0].address)}
           </div>
-          <LeaderboardStampCounter count={players[0].collected} on:click={show(players[0].code)} />
+          <LeaderboardStampCounter count={players[0].score || 0} on:click={show(players[0].code)} />
         </div>
       {:else}
         <img src={profileIcon} alt="avatar" />
@@ -103,7 +103,7 @@
           <div class="top-players-label-pubkey">
             {truncatePubkey(players[2].address)}
           </div>
-          <LeaderboardStampCounter count={players[2].collected} on:click={show(players[2].code)} />
+          <LeaderboardStampCounter count={players[2].score || 0} on:click={show(players[2].code)} />
         </div>
       {:else}
         <img src={profileIcon} alt="avatar" />

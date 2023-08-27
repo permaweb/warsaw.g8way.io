@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@permaweb/stampjs": "^0.5.4",
+    "@permaweb/stampjs": "^0.5.6",
     "arweave-wallet-connector": "0.0.31",
     "crocks": "^0.12.4",
     "date-fns": "^2.29.3",

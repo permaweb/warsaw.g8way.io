@@ -88,19 +88,18 @@ export async function getState(contract) {
   //console.time("warp");
   //await warp.contract(contract).syncState("https://dre-1.warp.cc/contract", { validity: true });
 
-  return (
-    warp
-      .contract(contract)
-      //.contract('PN1UdRoELsWRulkWwmO6n_27d5lFPo4q8VCWvQw7U14')
-      .setEvaluationOptions({
-        remoteSyncEnabled: true,
-        allowBigInt: true
-      })
-      .readState()
-      .then((result) => (console.log("state", result), result))
-      .then((result) => result.cachedValue)
-      .then((result) => result.state)
-      .catch((e) => console.log(e))
-  );
+  return warp
+    .contract(contract)
+    .setEvaluationOptions({
+      remoteSyncEnabled: true,
+      allowBigInt: true,
+      unsafeClient: "skip",
+      internalWrites: true
+    })
+    .readState()
+    .then((result) => (console.log("state", result), result))
+    .then((result) => result.cachedValue)
+    .then((result) => result.state)
+    .catch((e) => console.log(e));
   //.then((r) => (console.timeEnd("warp"), r));
 }

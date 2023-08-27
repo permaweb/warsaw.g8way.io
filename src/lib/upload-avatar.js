@@ -50,8 +50,8 @@ export async function compressAndResizeImage(file) {
         ctx.msImageSmoothingEnabled = false;
         ctx.imageSmoothingEnabled = false;
 
-        const width = 300;
-        const height = 300;
+        const width = 100;
+        const height = 100;
         canvas.width = width;
         canvas.height = height;
 

@@ -163,7 +163,7 @@ export default function (
           handle: ev.handle,
           bio: ev.bio,
           avatar: avatar.id,
-          points: ev.points
+          points: ev.points ? ev.points : 0
         });
 
         localStorage.setItem("address", address);

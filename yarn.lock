@@ -415,10 +415,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@permaweb/stampjs@^0.5.4":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@permaweb/stampjs/-/stampjs-0.5.4.tgz#7bc61d0bcde77327e154a9c9b80e9ca56ceeae9d"
-  integrity sha512-RzOKYDJdHuV1f3J4qDVRaSGtGOpyu8RZ8ZMaQ4MX3wJ9vILqehDALw8fqwvLqR5ip+E9f21zQq/1CVqegUNnkw==
+"@permaweb/stampjs@^0.5.6":
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/@permaweb/stampjs/-/stampjs-0.5.6.tgz#f1bcd7b76503d48dc232dda6fba05cd122534491"
+  integrity sha512-A7UBezs+/2L4/ppkYjsWz2l+T414gVp8PPMXzo9BT7hrb7Xqktv8pYrPJdgkWPnv3xrZtuAScQ8WKiFY8fOwlg==
   dependencies:
     ar-gql "^1.2.1"
     ramda "^0.29.0"

@@ -19,7 +19,7 @@ build({
     });
     replace.sync({
       files: "./dist/game.js",
-      from: ["function handle"],
+      from: ["async function handle"],
       to: "export async function handle",
       countMatches: true
     });

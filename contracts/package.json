@@ -8,8 +8,15 @@
     "build": "node build.js",
     "deploy": "npx warp-contracts-cli deploy"
   },
+  "dependencies": {
+    "@permaweb/stampjs": "^0.5.5",
+    "ramda": "^0.29.0",
+    "warp-contracts": "^1.4.17",
+    "warp-contracts-plugin-deploy": "^1.0.9"
+  },
   "devDependencies": {
     "esbuild": "^0.17.18",
-    "replace-in-file": "^6.3.5"
+    "replace-in-file": "^6.3.5",
+    "uvu": "^0.5.6"
   }
 }

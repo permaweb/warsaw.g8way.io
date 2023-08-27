@@ -1,7 +1,10 @@
+import { compose, prop, propEq, find, values } from "ramda";
+
 /* global ContractAssert ContractError SmartWeave */
 
-const propEq = (k, v) => (o) => o[k] === v;
-const functions = { register, slash, reset, evolve, setAdmin };
+//const propEq = (k, v) => (o) => o[k] === v;
+
+const functions = { register, stamp, slash, reset, evolve, setAdmin };
 
 /**
  * @typedef Player
@@ -11,6 +14,7 @@ const functions = { register, slash, reset, evolve, setAdmin };
  * @property {string} avatar
  * @property {string} bio
  * @property {string} address
+ * @property {number} points
  */
 
 /**
@@ -30,9 +34,37 @@ export async function handle(state, action) {
   throw new ContractError(`${action.input.function} function not implemented!`);
 }
 
+function stamp(state, action) {
+  const place = compose(
+    prop("value"),
+    find(propEq("Data-Source", "name"))
+  )(SmartWeave.transaction.tags);
+
+  const points = compose(prop("points"), find(propEq(place, "token")), values)(state.players);
+
+  let player = find(
+    (p) => propEq(action.caller, "address", p) && propEq(0, "points", p),
+    values(state.players)
+  );
+
+  if (!player) {
+    return { state };
+  }
+  if (!points) {
+    return { state };
+  }
+
+  if (!player.score) {
+    player.score = 0;
+  }
+  player.score += points;
+  state.players[player.code] = player;
+  return { state };
+}
+
 /**
  * @param {State} state
- * @param {{input: {code: string, token: string, avatar: string, handle: string, bio: string}, caller: string}} action
+ * @param {{input: {code: string, token: string, avatar: string, handle: string, bio: string, points: number}, caller: string}} action
  */
 async function register(state, action) {
   ContractAssert(action.input.code, "QR Code is Required!");
@@ -42,7 +74,7 @@ async function register(state, action) {
   );
   ContractAssert(action.caller && action.caller.length === 43, "caller is invalid");
   ContractAssert(action.input.avatar, "avatar id is required!");
-  ContractAssert(action.input.bio, "bio is required!");
+  //ContractAssert(action.input.bio, "bio is required!");
   ContractAssert(action.input.handle, "user is required!");
 
   const _state = typeof state === "string" ? JSON.parse(state) : Object.assign({}, state);
@@ -51,7 +83,8 @@ async function register(state, action) {
   const address = action.caller;
   const token = action.input.token;
   const avatar = action.input.avatar;
-  const bio = action.input.bio;
+  const bio = action.input?.bio ? action.input.bio : "";
+  const points = action.input?.points ? action.input.points : 0;
 
   if (_state.players[code]) {
     throw new ContractError("Player already registered!");
@@ -68,7 +101,8 @@ async function register(state, action) {
       code,
       avatar,
       handle: action.input.handle,
-      bio
+      bio,
+      points
     };
   }
 

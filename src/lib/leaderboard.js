@@ -1,4 +1,4 @@
-import { assoc, compose, prop, propEq, values, sortWith, descend, filter } from "ramda";
+import { assoc, compose, prop, propEq, propOr, values, sortWith, descend, filter } from "ramda";
 import { AsyncReader, Async } from "./utils.js";
 import { GAME_CONTRACT } from "./contract";
 
@@ -13,11 +13,13 @@ export function leaderboard() {
       ask(
         ({ getState }) =>
           getState(contract)
-            .map((x) => (console.log(x), x))
             .map(compose(values, prop("players")))
-            .map((x) => (console.log(x), x))
-            .chain(fetchStamps)
-        // .map(sortWith([descend(prop("collected"))]))
+            // filter just players
+            //.map(filter(propEq('points',0)))
+
+            // get stamp count for a player for game
+            // .chain(fetchStamps)
+            .map(sortWith([descend(propOr(0, "score"))]))
         //.map(filter((p) => p.collected > 0))
       )
     )
@@ -43,4 +45,23 @@ function countStamps(players) {
       const collected = stamps.filter(propEq("asset", v.token)).length;
       return [...a, assoc("collected", collected, v)];
     }, []);
+}
+
+function countPlayerStampsQuery() {
+  return `query {
+    transactions (tags: [
+      {name:"Protocol-Name", values:["Stamp"]}
+      {name: "Stamp-Game", values: ["Warsaw"]}
+    ]) {
+      edges {
+        node {
+          id
+          tags {
+            name 
+            value
+          }
+        }
+      }
+    }
+  }`;
 }
